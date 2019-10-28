@@ -68,7 +68,7 @@
               i+=1
             }
             document.querySelector(".response").innerHTML= money[i]
-            },1000)
+            },2000)
           }
           httpRequest.open('GET','https://api.exchangeratesapi.io/latest')
           httpRequest.send()
@@ -84,10 +84,10 @@
           }
         }
         clearInterval(interval)
-        document.querySelector(".response").innerHTML= money[a];
-        console.log(money[a])
+        document.querySelector(".response").innerHTML= money[a]
         setTimeout(function(){
-          makeInterval()},3000)
+           makeInterval()
+          },15000)
       }
     </script>
   </body>
