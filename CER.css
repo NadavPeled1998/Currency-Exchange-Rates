@@ -1,0 +1,44 @@
+body{
+    background-color: blue;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h1{
+    text-align: center;
+    color: black;
+    text-shadow: -2px 0 gold, 0 2px gold, 2px 0 gold, 0 -2px gold;
+    font-size: 50px;
+    background-color: #3b5998;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-top: 18px;
+    padding-bottom: 15px;
+  }
+  select{
+    margin-left: 10%;
+    width: 10%;
+  }
+
+  button{
+    width: 12%;
+    display: inline;
+  }
+  .box-1{
+    font-weight: bold;
+    font-size: 22px;
+    margin-left: 40%;
+    margin-top: 12.5%;
+    text-shadow: -1px 0 gold, 0 1px gold, 1px 0 gold, 0 -1px gold;
+
+  }
+  .box-2{
+    font-size: 13px;
+    text-align: right;
+    margin-right: 2.5%;
+    margin-top: 17.5%;
+    font-style:italic;
+    font-weight: lighter;
+    color: gold;
+  }
+  

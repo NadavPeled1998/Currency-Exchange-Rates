@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="CER.css">
+    <title>Currency Exchange Rates</title>
+  </head>
+  <body onload="makeInterval()">
+    <h1>Currency Exchange Rates</h1>
+    <select class="money1" name="money1">
+      <option value="AUD" class= "AUD">AUD</option><option value="BGN"class="BGN">BGN</option>
+      <option value="BRL" class="BRL">BRL</option><option value="CAD"class = "CAD">CAD</option>
+      <option value="CHF" class = "CHF">CHF</option><option value="CNY"class = "CNY">CNY</option>
+      <option value="CZK" class = "CZK">CZK</option><option value="DKK"class = "DKK">DKK</option>
+      <option value="GBP" class = "GBP">GBP</option><option value="HKD"class = "HKD">HKD</option>
+      <option value="HRK"class = "HRK">HRK</option><option value="HUF"class = "HUF">HUF</option>
+      <option value="IDR"class = "IDR">IDR</option><option value="ILS"class = "ILS">ILS</option>
+      <option value="INR"class = "INR">INR</option><option value="ISK"class = "ISK">ISK</option>
+      <option value="JPY"class = "JPY">JPY</option><option value="KRW"class = "KRW">KRW</option>
+      <option value="MXN"class = "MXN">MXN</option><option value="MYR"class = "MYR">MYR</option>
+      <option value="NOK"class = "NOK">NOK</option><option value="NZD"class = "NZD">NZD</option>
+      <option value="PHP"class = "PHP">PHP</option><option value="PLN"class = "PLN">PLN</option>
+      <option value="RON"class = "RON">RON</option><option value="RUB"class = "RUB">RUB</option>
+      <option value="SEK"class = "SEK">SEK</option><option value="SGD"class = "SGD">SGD</option>
+      <option value="THB"class = "THB">THB</option><option value="TRY"class = "TRY">TRY</option>
+      <option value="USD"class = "USD" >USD</option><option value="ZAR"class = "ZAR">ZAR</option>
+    </select>
+    <button type="submit" name="button" onclick = "makeRequest()">Convert</button>
+    <div class="box-1">
+      <span>1 EURO = </span>
+      <span class="response"><span>
+    </div>
+    <div class="box-2"></div>
+    <script type="text/javascript">
+
+      const option = document.querySelectorAll("option")
+      let money = []
+      let interval
+      let json
+      let i = 0
+
+      function makeInterval(){
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.onload = function(){
+          if (httpRequest.status === 200){
+            json = JSON.parse(httpRequest.responseText);
+          }else {
+            alert('There is an error')
+          }
+          let selector = document.querySelector(".money1").value
+          document.querySelector(".box-2").innerHTML ="Updated on:"+json.date
+          if(money.length<1){
+              for(v in json.rates){
+                money.push(v + " " + json.rates[v])
+                money.sort()
+              }
+            }
+          for (i = 0; i < option.length-1; i++) {
+            if (option[i].value == selector){
+              break
+            }
+          }if (i===0){
+            document.querySelector(".response").innerHTML = money[0]
+          }interval = setInterval(() => {
+            if(i>option.length-2){
+              i = 0;
+            }else{
+              i+=1
+            }
+            document.querySelector(".response").innerHTML= money[i]
+            },1000)
+          }
+          httpRequest.open('GET','https://api.exchangeratesapi.io/latest')
+          httpRequest.send()
+      } 
+
+      function makeRequest(){
+        console.log(money)
+        let selector = document.querySelector(".money1").value
+        let a
+        for (a = 0; a < option.length-1; a++) {
+          if (option[a].value == selector){
+            break
+          }
+        }
+        clearInterval(interval)
+        document.querySelector(".response").innerHTML= money[a];
+        console.log(money[a])
+        setTimeout(function(){
+          makeInterval()},3000)
+      }
+    </script>
+  </body>
+</html>
